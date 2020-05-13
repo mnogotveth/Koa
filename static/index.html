@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>NODE.js</title>
+</head>
+<body>
+<form id="user-create-form" action="/api/contacts" method="POST" enctype="application/x-www-form-urlencoded">
+    <input type="text" name="user" placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ" autocomplete="off" class="user-input" id="user-input">
+    <br>
+    <input type="text" name="phone" placeholder="НОМЕР ТЕЛЕФОНА" autocomplete="off" class="phone-input" id="phone-input">
+    <button type="submit">СОЗДАТЬ</button>
+</form>
+
+<hr>
+
+<form action="/api/contacts/foto" method="POST" enctype="multipart/form-data">
+    <input type="text" name="fotodescription" placeholder="ОПИСАНИЕ КАРТИНКИ">
+    <br>
+    <input type="file" name="foto">
+    <button type="submit">ЗАГРУЗИТЬ ФОТО</button>
+</form>
+</body>
+<script>
+    const userCreateURL = '/api/contacts';
+    const userForm = document.querySelector('.user-create-form');
+    const newUserFromData = new FormData(document.querySelector('form'));
+    userForm.addEventListener('submit', (e) => {
+        try {
+            const userData = userForm.attributes.id.ownerDocument.location.search;
+            console.log(userData);
+            e.preventDefault();
+            fetch(userCreateURL, {
+                method: 'POST',
+                body: '?user=sdsfsfs&phone=3453535'
+            })
+                .then(result => {
+                    console.log(result);
+                })
+        } catch (err) {
+            console.log(err);
+        }
+    })
+</script>
+</html>
